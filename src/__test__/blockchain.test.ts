@@ -1,5 +1,7 @@
-const Blockchain = require("../blockchain");
-const Block = require("./../block");
+import { Blockchain } from "./../blockchain/blockchain";
+import { GENESIS_BLOCK } from "./../config";
+import { Block } from "./../blockchain/block";
+import cryptoHash from "./../utils/crypto-hash";
 
 describe("Blockchain", () => {
   const blockchain = new Blockchain();
@@ -13,7 +15,7 @@ describe("Blockchain", () => {
   });
 
   it("adds a new block to the chain", () => {
-    const data = "some data";
+    const data = ["some data"];
     blockchain.addBlock({ data });
 
     expect(blockchain.chain[blockchain.chain.length - 1].data).toEqual(data);

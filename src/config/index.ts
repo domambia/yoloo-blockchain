@@ -5,4 +5,4 @@ const GENESIS_BLOCK = {
   data: [],
 };
 
-module.export = { GENESIS_BLOCK };
+export { GENESIS_BLOCK };

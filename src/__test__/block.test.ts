@@ -1,6 +1,6 @@
-const Block = require("./../block");
-const GENESIS_BLOCK = require("./../config");
-const cryptoHash = require("./../crypto-hash");
+import { GENESIS_BLOCK } from "./../config/index";
+import { Block } from "./../blockchain/block";
+import cryptoHash from "./../utils/crypto-hash";
 
 describe("Block", () => {
   const timestamp = "2020-01-01";
@@ -30,18 +30,18 @@ describe("Block", () => {
   });
 
   describe("mine block", () => {
-    const lastHash = Block.genesis();
-    const data = "some data";
-    const minedBlock = Block.mineBlock({ lastHash, data });
+    const lastBock = Block.genesis();
+    const data = ["some data"];
+    const minedBlock = Block.mineBlock({ lastBlock: lastBock, data });
     expect(minedBlock instanceof Block).toBe(true);
 
     it("sets the `lastHash` to be the `hash`  of the lastBlock", () => {
-      expect(minedBlock.lastHash).toEqual(lastHash.hash);
+      expect(minedBlock.lastHash).toEqual(lastBock.hash);
     });
 
     it("sets the hash of the new block", () => {
       expect(minedBlock.hash).toEqual(
-        cryptoHash(minedBlock.timestamp, lastHash.hash, data)
+        cryptoHash(minedBlock.timestamp, lastBock.hash, data)
       );
     });
 
